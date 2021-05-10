@@ -1,0 +1,26 @@
+PODS:
+  - Cuckoo (1.5.0):
+    - Cuckoo/Swift (= 1.5.0)
+  - Cuckoo/Swift (1.5.0)
+  - Nimble (9.2.0)
+  - Quick (4.0.0)
+
+DEPENDENCIES:
+  - Cuckoo
+  - Nimble
+  - Quick
+
+SPEC REPOS:
+  trunk:
+    - Cuckoo
+    - Nimble
+    - Quick
+
+SPEC CHECKSUMS:
+  Cuckoo: 09ff1b7c6613b9c27dafea90702ca32208fe59d3
+  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
+
+PODFILE CHECKSUM: 4ed46c8b568104543d93e03f9f83c9d189cc0074
+
+COCOAPODS: 1.10.1
