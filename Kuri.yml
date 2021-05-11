@@ -1,0 +1,6 @@
+DefaultTemplateDirectoryPath: ./KuriTemplate/
+ProjectRootPath: ./
+ProjectFileName: GitHubClient.xcodeproj
+GenerateRootPath: ./GitHubClient/View/
+Target: GitHubClient
+ShouldRemoveLayerNameFromDirectory: false
