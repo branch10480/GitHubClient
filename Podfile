@@ -6,6 +6,7 @@ target 'GitHubClient' do
   use_frameworks!
 
   # Pods for GitHubClient
+  pod 'DifferenceKit'
 
   target 'GitHubClientTests' do
     inherit! :search_paths

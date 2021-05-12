@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  GitHubClient
+
+  Created by branch10480 on 2021/05/12.
+  
+*/
+
+"ReposListView.title" = "GitHub Repositories";

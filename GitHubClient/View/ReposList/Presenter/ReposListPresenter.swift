@@ -12,7 +12,7 @@ protocol ReposListPresenterProtocol: AnyObject {
 }
 
 protocol ReposListPresenterOutputProtocol: AnyObject {
-    func updateCollectionViewData(with: [GitHubRepo])
+    func updateCollectionViewData(with: [GitHubRepoViewData])
 }
 
 final class ReposListPresenter: ReposListPresenterProtocol {
@@ -35,7 +35,8 @@ final class ReposListPresenter: ReposListPresenterProtocol {
         interactor.fetchRepos(language: "swift") { [weak self] result in
             switch result {
             case .success(let data):
-                self?.view?.updateCollectionViewData(with: data)
+                let viewData = data.map { GitHubRepoViewData($0) }
+                self?.view?.updateCollectionViewData(with: viewData)
             case .failure(let e):
                 print(e.localizedDescription)
             }

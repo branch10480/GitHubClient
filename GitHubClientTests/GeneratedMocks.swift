@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-12 13:06:22 +0000
+// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-12 15:04:46 +0000
 
 //
 //  GitHubRepository.swift
@@ -103,7 +103,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-12 13:06:22 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-12 15:04:46 +0000
 
 //
 //  ReposListUseCase.swift
@@ -208,7 +208,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-12 13:06:22 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-12 15:04:46 +0000
 
 //
 //  ReposListPresenter.swift
@@ -339,9 +339,9 @@ import Foundation
     
     
     
-     func updateCollectionViewData(with: [GitHubRepo])  {
+     func updateCollectionViewData(with: [GitHubRepoViewData])  {
         
-    return cuckoo_manager.call("updateCollectionViewData(with: [GitHubRepo])",
+    return cuckoo_manager.call("updateCollectionViewData(with: [GitHubRepoViewData])",
             parameters: (with),
             escapingParameters: (with),
             superclassCall:
@@ -361,9 +361,9 @@ import Foundation
 	    }
 	    
 	    
-	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([GitHubRepo])> where M1.MatchedType == [GitHubRepo] {
-	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepo])>] = [wrap(matchable: with) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "updateCollectionViewData(with: [GitHubRepo])", parameterMatchers: matchers))
+	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([GitHubRepoViewData])> where M1.MatchedType == [GitHubRepoViewData] {
+	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepoViewData])>] = [wrap(matchable: with) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "updateCollectionViewData(with: [GitHubRepoViewData])", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -383,9 +383,9 @@ import Foundation
 	
 	    
 	    @discardableResult
-	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.__DoNotUse<([GitHubRepo]), Void> where M1.MatchedType == [GitHubRepo] {
-	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepo])>] = [wrap(matchable: with) { $0 }]
-	        return cuckoo_manager.verify("updateCollectionViewData(with: [GitHubRepo])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.__DoNotUse<([GitHubRepoViewData]), Void> where M1.MatchedType == [GitHubRepoViewData] {
+	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepoViewData])>] = [wrap(matchable: with) { $0 }]
+	        return cuckoo_manager.verify("updateCollectionViewData(with: [GitHubRepoViewData])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -397,14 +397,14 @@ import Foundation
     
 
     
-     func updateCollectionViewData(with: [GitHubRepo])   {
+     func updateCollectionViewData(with: [GitHubRepoViewData])   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-12 13:06:22 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-12 15:04:46 +0000
 
 //
 //  ReposListView.swift
@@ -479,7 +479,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-12 13:06:22 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-12 15:04:46 +0000
 
 //
 //  ReposListView.swift
@@ -491,4 +491,5 @@ import UIKit
 import Cuckoo
 @testable import GitHubClient
 
+import DifferenceKit
 import UIKit

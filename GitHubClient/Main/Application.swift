@@ -16,7 +16,8 @@ class Application {
     func setupRootView() {
         let window = UIWindow()
         let vc = ReposListRouter.assembleModules()
-        window.rootViewController = vc
+        let nc = UINavigationController(rootViewController: vc)
+        window.rootViewController = nc
         window.makeKeyAndVisible()
         self.window = window
     }
