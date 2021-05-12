@@ -8,9 +8,11 @@
 import Foundation
 
 protocol ReposListPresenterProtocol: AnyObject {
+    func viewDidAppear()
 }
 
 protocol ReposListPresenterOutputProtocol: AnyObject {
+    func reloadCollectionView()
 }
 
 final class ReposListPresenter: ReposListPresenterProtocol {
@@ -28,4 +30,8 @@ final class ReposListPresenter: ReposListPresenterProtocol {
         self.router = router
         self.interactor = interactor
     }
+
+    func viewDidAppear() {
+    }
+
 }

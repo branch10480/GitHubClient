@@ -25,4 +25,6 @@ final class ReposListViewController: UIViewController {
 }
 
 extension ReposListViewController: ReposListPresenterOutputProtocol {
+    func reloadCollectionView() {
+    }
 }

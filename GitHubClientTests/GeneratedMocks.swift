@@ -1,4 +1,109 @@
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-11 15:51:39 +0000
+// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-12 12:05:34 +0000
+
+//
+//  GitHubRepository.swift
+//  GitHubClient
+//
+//  Created by branch10480 on 2021/05/11.
+//
+
+import Cuckoo
+@testable import GitHubClient
+
+import Foundation
+
+
+ class MockGitHubRepositoryProtocol: GitHubRepositoryProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = GitHubRepositoryProtocol
+    
+     typealias Stubbing = __StubbingProxy_GitHubRepositoryProtocol
+     typealias Verification = __VerificationProxy_GitHubRepositoryProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: GitHubRepositoryProtocol?
+
+     func enableDefaultImplementation(_ stub: GitHubRepositoryProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)  {
+        
+    return cuckoo_manager.call("fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)",
+            parameters: (language, completion),
+            escapingParameters: (language, completion),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.fetchRepos(language: language, completion: completion))
+        
+    }
+    
+
+	 struct __StubbingProxy_GitHubRepositoryProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(language: M1, completion: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(String, (Result<[GitHubRepo], Error>) -> Void)> where M1.MatchedType == String, M2.MatchedType == (Result<[GitHubRepo], Error>) -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, (Result<[GitHubRepo], Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: completion) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGitHubRepositoryProtocol.self, method: "fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_GitHubRepositoryProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(language: M1, completion: M2) -> Cuckoo.__DoNotUse<(String, (Result<[GitHubRepo], Error>) -> Void), Void> where M1.MatchedType == String, M2.MatchedType == (Result<[GitHubRepo], Error>) -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, (Result<[GitHubRepo], Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: completion) { $0.1 }]
+	        return cuckoo_manager.verify("fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class GitHubRepositoryProtocolStub: GitHubRepositoryProtocol {
+    
+
+    
+
+    
+     func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-12 12:05:34 +0000
 
 //
 //  ReposListUseCase.swift
@@ -36,6 +141,21 @@ import Foundation
     
 
     
+    
+    
+     func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)  {
+        
+    return cuckoo_manager.call("fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)",
+            parameters: (language, completion),
+            escapingParameters: (language, completion),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.fetchRepos(language: language, completion: completion))
+        
+    }
+    
 
 	 struct __StubbingProxy_ReposListInteractorProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -44,6 +164,11 @@ import Foundation
 	        self.cuckoo_manager = manager
 	    }
 	    
+	    
+	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(language: M1, completion: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(String, (Result<[GitHubRepo], Error>) -> Void)> where M1.MatchedType == String, M2.MatchedType == (Result<[GitHubRepo], Error>) -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, (Result<[GitHubRepo], Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: completion) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListInteractorProtocol.self, method: "fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)", parameterMatchers: matchers))
+	    }
 	    
 	}
 
@@ -61,6 +186,12 @@ import Foundation
 	    
 	
 	    
+	    @discardableResult
+	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(language: M1, completion: M2) -> Cuckoo.__DoNotUse<(String, (Result<[GitHubRepo], Error>) -> Void), Void> where M1.MatchedType == String, M2.MatchedType == (Result<[GitHubRepo], Error>) -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, (Result<[GitHubRepo], Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: completion) { $0.1 }]
+	        return cuckoo_manager.verify("fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -70,10 +201,210 @@ import Foundation
     
 
     
+     func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-11 15:51:39 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-12 12:05:34 +0000
+
+//
+//  ReposListPresenter.swift
+//
+//  Created by branch10480 on 2021/5/11.
+//  Copyright © 2021 branch10480. All rights reserved.
+//
+
+import Cuckoo
+@testable import GitHubClient
+
+import Foundation
+
+
+ class MockReposListPresenterProtocol: ReposListPresenterProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = ReposListPresenterProtocol
+    
+     typealias Stubbing = __StubbingProxy_ReposListPresenterProtocol
+     typealias Verification = __VerificationProxy_ReposListPresenterProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: ReposListPresenterProtocol?
+
+     func enableDefaultImplementation(_ stub: ReposListPresenterProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func viewDidAppear()  {
+        
+    return cuckoo_manager.call("viewDidAppear()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.viewDidAppear())
+        
+    }
+    
+
+	 struct __StubbingProxy_ReposListPresenterProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func viewDidAppear() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterProtocol.self, method: "viewDidAppear()", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_ReposListPresenterProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func viewDidAppear() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("viewDidAppear()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class ReposListPresenterProtocolStub: ReposListPresenterProtocol {
+    
+
+    
+
+    
+     func viewDidAppear()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
+
+ class MockReposListPresenterOutputProtocol: ReposListPresenterOutputProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = ReposListPresenterOutputProtocol
+    
+     typealias Stubbing = __StubbingProxy_ReposListPresenterOutputProtocol
+     typealias Verification = __VerificationProxy_ReposListPresenterOutputProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: ReposListPresenterOutputProtocol?
+
+     func enableDefaultImplementation(_ stub: ReposListPresenterOutputProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func reloadCollectionView()  {
+        
+    return cuckoo_manager.call("reloadCollectionView()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.reloadCollectionView())
+        
+    }
+    
+
+	 struct __StubbingProxy_ReposListPresenterOutputProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func reloadCollectionView() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "reloadCollectionView()", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_ReposListPresenterOutputProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func reloadCollectionView() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("reloadCollectionView()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class ReposListPresenterOutputProtocolStub: ReposListPresenterOutputProtocol {
+    
+
+    
+
+    
+     func reloadCollectionView()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-12 12:05:34 +0000
 
 //
 //  ReposListView.swift
@@ -148,7 +479,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-11 15:51:39 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-12 12:05:34 +0000
 
 //
 //  ReposListView.swift

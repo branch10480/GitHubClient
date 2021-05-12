@@ -8,10 +8,10 @@
 import Foundation
 
 protocol GitHubRepositoryProtocol {
-    func fetchSwiftRepos(completion: @escaping (Result<[GitHubRepos], Error>) -> Void)
+    func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)
 }
 
 final class GitHubRepository: GitHubRepositoryProtocol {
-    func fetchSwiftRepos(completion: @escaping (Result<[GitHubRepos], Error>) -> Void) {
+    func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void) {
     }
 }
