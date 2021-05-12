@@ -25,6 +25,6 @@ final class ReposListViewController: UIViewController {
 }
 
 extension ReposListViewController: ReposListPresenterOutputProtocol {
-    func reloadCollectionView() {
+    func updateCollectionViewData(with: [GitHubRepo]) {
     }
 }

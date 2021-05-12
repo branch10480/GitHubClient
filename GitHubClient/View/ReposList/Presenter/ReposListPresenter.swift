@@ -12,7 +12,7 @@ protocol ReposListPresenterProtocol: AnyObject {
 }
 
 protocol ReposListPresenterOutputProtocol: AnyObject {
-    func reloadCollectionView()
+    func updateCollectionViewData(with: [GitHubRepo])
 }
 
 final class ReposListPresenter: ReposListPresenterProtocol {
@@ -32,6 +32,14 @@ final class ReposListPresenter: ReposListPresenterProtocol {
     }
 
     func viewDidAppear() {
+        interactor.fetchRepos(language: "swift") { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.view?.updateCollectionViewData(with: data)
+            case .failure(let e):
+                print(e.localizedDescription)
+            }
+        }
     }
 
 }

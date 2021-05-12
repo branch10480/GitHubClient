@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-12 12:05:34 +0000
+// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-12 13:06:22 +0000
 
 //
 //  GitHubRepository.swift
@@ -103,7 +103,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-12 12:05:34 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-12 13:06:22 +0000
 
 //
 //  ReposListUseCase.swift
@@ -208,7 +208,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-12 12:05:34 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-12 13:06:22 +0000
 
 //
 //  ReposListPresenter.swift
@@ -339,16 +339,16 @@ import Foundation
     
     
     
-     func reloadCollectionView()  {
+     func updateCollectionViewData(with: [GitHubRepo])  {
         
-    return cuckoo_manager.call("reloadCollectionView()",
-            parameters: (),
-            escapingParameters: (),
+    return cuckoo_manager.call("updateCollectionViewData(with: [GitHubRepo])",
+            parameters: (with),
+            escapingParameters: (with),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.reloadCollectionView())
+            defaultCall: __defaultImplStub!.updateCollectionViewData(with: with))
         
     }
     
@@ -361,9 +361,9 @@ import Foundation
 	    }
 	    
 	    
-	    func reloadCollectionView() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "reloadCollectionView()", parameterMatchers: matchers))
+	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([GitHubRepo])> where M1.MatchedType == [GitHubRepo] {
+	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepo])>] = [wrap(matchable: with) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "updateCollectionViewData(with: [GitHubRepo])", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -383,9 +383,9 @@ import Foundation
 	
 	    
 	    @discardableResult
-	    func reloadCollectionView() -> Cuckoo.__DoNotUse<(), Void> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("reloadCollectionView()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.__DoNotUse<([GitHubRepo]), Void> where M1.MatchedType == [GitHubRepo] {
+	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepo])>] = [wrap(matchable: with) { $0 }]
+	        return cuckoo_manager.verify("updateCollectionViewData(with: [GitHubRepo])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -397,14 +397,14 @@ import Foundation
     
 
     
-     func reloadCollectionView()   {
+     func updateCollectionViewData(with: [GitHubRepo])   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-12 12:05:34 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-12 13:06:22 +0000
 
 //
 //  ReposListView.swift
@@ -479,7 +479,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-12 12:05:34 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-12 13:06:22 +0000
 
 //
 //  ReposListView.swift

@@ -45,14 +45,14 @@ class ReposListSpec: QuickSpec {
                             }
                     })
                     stub(self.presenterOutput, block: { proxy in
-                        when(proxy.reloadCollectionView()).thenDoNothing()
+                        when(proxy.updateCollectionViewData(with: any())).thenDoNothing()
                     })
 
                     // テスト開始
                     self.presenter.viewDidAppear()
 
                     // 検証
-                    verify(self.presenterOutput, times(1)).reloadCollectionView()
+                    verify(self.presenterOutput, times(1)).updateCollectionViewData(with: any())
                     verify(self.interactor, times(1))
                         .fetchRepos(language: "swift", completion: anyClosure())
                 }
