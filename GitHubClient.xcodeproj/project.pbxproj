@@ -14,6 +14,7 @@
 		4817DAD2264C0D7500B508FF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4817DAD4264C0D7500B508FF /* Localizable.strings */; };
 		4817DAD9264C0EFB00B508FF /* RepoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4817DAD7264C0EFB00B508FF /* RepoListCell.swift */; };
 		4817DADA264C0EFB00B508FF /* RepoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4817DAD8264C0EFB00B508FF /* RepoListCell.xib */; };
+		488841DD264D413200EAC3CC /* GitHubReposResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488841DC264D413200EAC3CC /* GitHubReposResponse.swift */; };
 		488ACA75264ACB0C00A7F661 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488ACA74264ACB0C00A7F661 /* Application.swift */; };
 		488ACA77264AD1C900A7F661 /* GitHubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488ACA76264AD1C900A7F661 /* GitHubRepository.swift */; };
 		488ACA79264AD23900A7F661 /* GitHubRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488ACA78264AD23900A7F661 /* GitHubRepo.swift */; };
@@ -60,6 +61,7 @@
 		4817DAD8264C0EFB00B508FF /* RepoListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepoListCell.xib; sourceTree = "<group>"; };
 		4823B84D2649755600781F9D /* Kuri.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = Kuri.yml; sourceTree = "<group>"; };
 		4823B84F2649756000781F9D /* KuriTemplate */ = {isa = PBXFileReference; lastKnownFileType = folder; path = KuriTemplate; sourceTree = "<group>"; };
+		488841DC264D413200EAC3CC /* GitHubReposResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubReposResponse.swift; sourceTree = "<group>"; };
 		488ACA74264ACB0C00A7F661 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		488ACA76264AD1C900A7F661 /* GitHubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepository.swift; sourceTree = "<group>"; };
 		488ACA78264AD23900A7F661 /* GitHubRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepo.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				488ACA78264AD23900A7F661 /* GitHubRepo.swift */,
+				488841DC264D413200EAC3CC /* GitHubReposResponse.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 			files = (
 				488ACA79264AD23900A7F661 /* GitHubRepo.swift in Sources */,
 				488ACA75264ACB0C00A7F661 /* Application.swift in Sources */,
+				488841DD264D413200EAC3CC /* GitHubReposResponse.swift in Sources */,
 				48F2856B26496FD70012920D /* AppDelegate.swift in Sources */,
 				4817DAD9264C0EFB00B508FF /* RepoListCell.swift in Sources */,
 				4817DACE264C0C6500B508FF /* StringExtensions.swift in Sources */,

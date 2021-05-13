@@ -7,6 +7,7 @@ target 'GitHubClient' do
 
   # Pods for GitHubClient
   pod 'DifferenceKit'
+  pod 'Alamofire'
 
   target 'GitHubClientTests' do
     inherit! :search_paths

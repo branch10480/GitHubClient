@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.4.3)
   - Cuckoo (1.5.0):
     - Cuckoo/Swift (= 1.5.0)
   - Cuckoo/Swift (1.5.0)
@@ -12,6 +13,7 @@ PODS:
   - Quick (4.0.0)
 
 DEPENDENCIES:
+  - Alamofire
   - Cuckoo
   - DifferenceKit
   - Nimble
@@ -19,17 +21,19 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Cuckoo
     - DifferenceKit
     - Nimble
     - Quick
 
 SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Cuckoo: 09ff1b7c6613b9c27dafea90702ca32208fe59d3
   DifferenceKit: 5659c430bb7fe45876fa32ce5cba5d6167f0c805
   Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
 
-PODFILE CHECKSUM: 39596467a3aa43e5304d8c3801cf688993ed035f
+PODFILE CHECKSUM: 8d8445a5b2a6e880962333f03a0865c416974c70
 
 COCOAPODS: 1.10.1

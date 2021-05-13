@@ -6,21 +6,40 @@
 //
 
 import Foundation
+import Alamofire
+
+enum GitHubClientError: Error {
+    case failedGettingData
+    case parseError
+}
 
 protocol GitHubRepositoryProtocol {
     func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)
 }
 
 final class GitHubRepository: GitHubRepositoryProtocol {
+
+    private let endPoint = "https://api.github.com"
+
     func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void) {
-        // TODO: Debug.
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-            let data = [
-                GitHubRepo(fullName: "Hoge/Fuga", stargazersCount: 2),
-                GitHubRepo(fullName: "Hoge/Fuga2", stargazersCount: 1),
-                GitHubRepo(fullName: "Hoge/Fuga3", stargazersCount: 0),
-            ]
-            completion(.success(data))
+
+        let q = "language:\(language)"
+        var urlString = endPoint + "/search/repositories"
+        urlString += "?q=\(q)"
+        let url = URL(string: urlString)!
+        AF.request(url, method: .get).responseJSON { response in
+            guard let data = response.data else {
+                completion(.failure(GitHubClientError.failedGettingData))
+                return
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            do {
+                let items = try decoder.decode(GitHubReposResponse.self, from: data).items
+                completion(.success(items))
+            } catch(let e) {
+                completion(.failure(e))
+            }
         }
     }
 }
