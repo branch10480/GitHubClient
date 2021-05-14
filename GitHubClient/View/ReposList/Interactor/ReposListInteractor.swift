@@ -8,7 +8,12 @@
 import Foundation
 
 protocol ReposListInteractorProtocol {
-    func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)
+    func fetchRepos(
+        language: String,
+        perPage: Int,
+        page: Int,
+        completion: @escaping (Result<[GitHubRepo], Error>) -> Void
+    )
 }
 
 final class ReposListInteractor: ReposListInteractorProtocol {
@@ -19,9 +24,13 @@ final class ReposListInteractor: ReposListInteractorProtocol {
         self.repository = repository
     }
 
-    func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) ->
-    Void) {
-        repository.fetchRepos(language: language) { result in
+    func fetchRepos(
+        language: String,
+        perPage: Int,
+        page: Int,
+        completion: @escaping (Result<[GitHubRepo], Error>) -> Void
+    ) {
+        repository.fetchRepos(language: language, perPage: perPage, page: page) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))

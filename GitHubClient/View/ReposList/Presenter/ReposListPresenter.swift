@@ -30,6 +30,9 @@ final class ReposListPresenter: ReposListPresenterProtocol {
     private weak var view: ReposListPresenterOutputProtocol?
     private let router: ReposListRouterProtocol
     private let interactor: ReposListInteractorProtocol
+    private var page: Int = 1
+    private let perPage: Int = 10
+    private let language = "swift"
     
     init(
         view: ReposListPresenterOutputProtocol,
@@ -43,7 +46,9 @@ final class ReposListPresenter: ReposListPresenterProtocol {
 
     func viewDidLoad() {
         view?.showProgressHUD()
-        interactor.fetchRepos(language: "swift") { [weak self] result in
+        interactor.fetchRepos(language: language, perPage: perPage, page: page) {
+            [weak self] result in
+            
             guard let self = self else { return }
             self.view?.dismissProgressHUD()
             switch result {

@@ -14,18 +14,27 @@ enum GitHubClientError: Error {
 }
 
 protocol GitHubRepositoryProtocol {
-    func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)
+    func fetchRepos(
+        language: String,
+        perPage: Int,
+        page: Int,
+        completion: @escaping (Result<[GitHubRepo], Error>) -> Void
+    )
 }
 
 final class GitHubRepository: GitHubRepositoryProtocol {
 
     private let endPoint = "https://api.github.com"
 
-    func fetchRepos(language: String, completion: @escaping (Result<[GitHubRepo], Error>) -> Void) {
-
+    func fetchRepos(
+        language: String,
+        perPage: Int,
+        page: Int,
+        completion: @escaping (Result<[GitHubRepo], Error>) -> Void
+    ) {
         let q = "language:\(language)"
         var urlString = endPoint + "/search/repositories"
-        urlString += "?q=\(q)"
+        urlString += "?q=\(q)&page=\(page)&per_page=\(perPage)"
         let url = URL(string: urlString)!
         AF.request(url, method: .get).responseJSON { response in
             guard let data = response.data else {
