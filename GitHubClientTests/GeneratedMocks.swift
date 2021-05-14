@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-12 15:04:46 +0000
+// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-14 03:54:33 +0000
 
 //
 //  GitHubRepository.swift
@@ -10,6 +10,7 @@
 import Cuckoo
 @testable import GitHubClient
 
+import Alamofire
 import Foundation
 
 
@@ -103,7 +104,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-12 15:04:46 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-14 03:54:33 +0000
 
 //
 //  ReposListUseCase.swift
@@ -208,7 +209,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-12 15:04:46 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-14 03:54:33 +0000
 
 //
 //  ReposListPresenter.swift
@@ -352,6 +353,36 @@ import Foundation
         
     }
     
+    
+    
+     func showProgressHUD()  {
+        
+    return cuckoo_manager.call("showProgressHUD()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.showProgressHUD())
+        
+    }
+    
+    
+    
+     func dismissProgressHUD()  {
+        
+    return cuckoo_manager.call("dismissProgressHUD()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.dismissProgressHUD())
+        
+    }
+    
 
 	 struct __StubbingProxy_ReposListPresenterOutputProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -364,6 +395,16 @@ import Foundation
 	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([GitHubRepoViewData])> where M1.MatchedType == [GitHubRepoViewData] {
 	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepoViewData])>] = [wrap(matchable: with) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "updateCollectionViewData(with: [GitHubRepoViewData])", parameterMatchers: matchers))
+	    }
+	    
+	    func showProgressHUD() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "showProgressHUD()", parameterMatchers: matchers))
+	    }
+	    
+	    func dismissProgressHUD() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "dismissProgressHUD()", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -388,6 +429,18 @@ import Foundation
 	        return cuckoo_manager.verify("updateCollectionViewData(with: [GitHubRepoViewData])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func showProgressHUD() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("showProgressHUD()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func dismissProgressHUD() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("dismissProgressHUD()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -401,10 +454,18 @@ import Foundation
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
+     func showProgressHUD()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func dismissProgressHUD()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-12 15:04:46 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-14 03:54:33 +0000
 
 //
 //  ReposListView.swift
@@ -479,7 +540,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-12 15:04:46 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-14 03:54:33 +0000
 
 //
 //  ReposListView.swift

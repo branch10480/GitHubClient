@@ -96,6 +96,14 @@ extension ReposListViewController: ReposListPresenterOutputProtocol {
             }
         }
     }
+    
+    func showProgressHUD() {
+        progressHUD.show()
+    }
+    
+    func dismissProgressHUD() {
+        progressHUD.dismiss()
+    }
 }
 
 // MARK: - UICollectionViewDataSource

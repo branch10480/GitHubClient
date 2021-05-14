@@ -34,6 +34,11 @@ class ReposListSpec: QuickSpec {
                 self.router = router
                 self.interactor = interactor
                 self.presenterOutput = presenterOutput
+
+                stub(self.presenterOutput, block: { proxy in
+                    when(proxy.showProgressHUD()).thenDoNothing()
+                    when(proxy.dismissProgressHUD()).thenDoNothing()
+                })
             }
             context("リスト表示") {
                 it("画面表示時にリポジトリリスト取得を行い、成功の場合リスト表示を行う") {
@@ -55,6 +60,8 @@ class ReposListSpec: QuickSpec {
                     verify(self.presenterOutput, times(1)).updateCollectionViewData(with: any())
                     verify(self.interactor, times(1))
                         .fetchRepos(language: "swift", completion: anyClosure())
+                    verify(self.presenterOutput, times(1)).showProgressHUD()
+                    verify(self.presenterOutput, times(1)).dismissProgressHUD()
                 }
             }
         }

@@ -13,6 +13,8 @@ protocol ReposListPresenterProtocol: AnyObject {
 
 protocol ReposListPresenterOutputProtocol: AnyObject {
     func updateCollectionViewData(with: [GitHubRepoViewData])
+    func showProgressHUD()
+    func dismissProgressHUD()
 }
 
 final class ReposListPresenter: ReposListPresenterProtocol {
@@ -32,7 +34,9 @@ final class ReposListPresenter: ReposListPresenterProtocol {
     }
 
     func viewDidAppear() {
+        view?.showProgressHUD()
         interactor.fetchRepos(language: "swift") { [weak self] result in
+            self?.view?.dismissProgressHUD()
             switch result {
             case .success(let data):
                 let viewData = data.map { GitHubRepoViewData($0) }
