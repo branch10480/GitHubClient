@@ -8,6 +8,7 @@
 import UIKit
 
 protocol ReposListRouterProtocol: AnyObject {
+    func showRepositoryDetailView(url: String)
 }
 
 final class ReposListRouter: ReposListRouterProtocol {
@@ -29,5 +30,13 @@ final class ReposListRouter: ReposListRouterProtocol {
         )
         vc.inject(presenter: presenter)
         return vc
+    }
+    
+    func showRepositoryDetailView(url urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        let destivation = WebViewRouter.assembleModules(with: url)
+        vc.present(destivation, animated: true, completion: nil)
     }
 }

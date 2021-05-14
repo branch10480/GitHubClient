@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-14 03:54:33 +0000
+// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-14 12:34:18 +0000
 
 //
 //  GitHubRepository.swift
@@ -104,7 +104,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-14 03:54:33 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-14 12:34:18 +0000
 
 //
 //  ReposListUseCase.swift
@@ -209,7 +209,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-14 03:54:33 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-14 12:34:18 +0000
 
 //
 //  ReposListPresenter.swift
@@ -221,6 +221,7 @@ import Foundation
 import Cuckoo
 @testable import GitHubClient
 
+import DifferenceKit
 import Foundation
 
 
@@ -243,22 +244,51 @@ import Foundation
     
 
     
-
-    
-
     
     
-    
-     func viewDidAppear()  {
+     var dataSource: [ReposListSectionModel] {
+        get {
+            return cuckoo_manager.getter("dataSource",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.dataSource)
+        }
         
-    return cuckoo_manager.call("viewDidAppear()",
+    }
+    
+
+    
+
+    
+    
+    
+     func viewDidLoad()  {
+        
+    return cuckoo_manager.call("viewDidLoad()",
             parameters: (),
             escapingParameters: (),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.viewDidAppear())
+            defaultCall: __defaultImplStub!.viewDidLoad())
+        
+    }
+    
+    
+    
+     func didTapRepoRow(indexPath: IndexPath)  {
+        
+    return cuckoo_manager.call("didTapRepoRow(indexPath: IndexPath)",
+            parameters: (indexPath),
+            escapingParameters: (indexPath),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.didTapRepoRow(indexPath: indexPath))
         
     }
     
@@ -271,9 +301,19 @@ import Foundation
 	    }
 	    
 	    
-	    func viewDidAppear() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	    var dataSource: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockReposListPresenterProtocol, [ReposListSectionModel]> {
+	        return .init(manager: cuckoo_manager, name: "dataSource")
+	    }
+	    
+	    
+	    func viewDidLoad() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterProtocol.self, method: "viewDidAppear()", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterProtocol.self, method: "viewDidLoad()", parameterMatchers: matchers))
+	    }
+	    
+	    func didTapRepoRow<M1: Cuckoo.Matchable>(indexPath: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(IndexPath)> where M1.MatchedType == IndexPath {
+	        let matchers: [Cuckoo.ParameterMatcher<(IndexPath)>] = [wrap(matchable: indexPath) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterProtocol.self, method: "didTapRepoRow(indexPath: IndexPath)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -290,12 +330,23 @@ import Foundation
 	    }
 	
 	    
+	    
+	    var dataSource: Cuckoo.VerifyReadOnlyProperty<[ReposListSectionModel]> {
+	        return .init(manager: cuckoo_manager, name: "dataSource", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	    @discardableResult
-	    func viewDidAppear() -> Cuckoo.__DoNotUse<(), Void> {
+	    func viewDidLoad() -> Cuckoo.__DoNotUse<(), Void> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("viewDidAppear()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("viewDidLoad()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func didTapRepoRow<M1: Cuckoo.Matchable>(indexPath: M1) -> Cuckoo.__DoNotUse<(IndexPath), Void> where M1.MatchedType == IndexPath {
+	        let matchers: [Cuckoo.ParameterMatcher<(IndexPath)>] = [wrap(matchable: indexPath) { $0 }]
+	        return cuckoo_manager.verify("didTapRepoRow(indexPath: IndexPath)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -303,11 +354,23 @@ import Foundation
 
  class ReposListPresenterProtocolStub: ReposListPresenterProtocol {
     
-
+    
+     var dataSource: [ReposListSectionModel] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([ReposListSectionModel]).self)
+        }
+        
+    }
     
 
     
-     func viewDidAppear()   {
+
+    
+     func viewDidLoad()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func didTapRepoRow(indexPath: IndexPath)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -340,16 +403,16 @@ import Foundation
     
     
     
-     func updateCollectionViewData(with: [GitHubRepoViewData])  {
+     func updateCollectionViewData(with: StagedChangeset<[ReposListSectionModel]>, completion: @escaping () -> Void)  {
         
-    return cuckoo_manager.call("updateCollectionViewData(with: [GitHubRepoViewData])",
-            parameters: (with),
-            escapingParameters: (with),
+    return cuckoo_manager.call("updateCollectionViewData(with: StagedChangeset<[ReposListSectionModel]>, completion: @escaping () -> Void)",
+            parameters: (with, completion),
+            escapingParameters: (with, completion),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.updateCollectionViewData(with: with))
+            defaultCall: __defaultImplStub!.updateCollectionViewData(with: with, completion: completion))
         
     }
     
@@ -392,9 +455,9 @@ import Foundation
 	    }
 	    
 	    
-	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([GitHubRepoViewData])> where M1.MatchedType == [GitHubRepoViewData] {
-	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepoViewData])>] = [wrap(matchable: with) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "updateCollectionViewData(with: [GitHubRepoViewData])", parameterMatchers: matchers))
+	    func updateCollectionViewData<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(with: M1, completion: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(StagedChangeset<[ReposListSectionModel]>, () -> Void)> where M1.MatchedType == StagedChangeset<[ReposListSectionModel]>, M2.MatchedType == () -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(StagedChangeset<[ReposListSectionModel]>, () -> Void)>] = [wrap(matchable: with) { $0.0 }, wrap(matchable: completion) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "updateCollectionViewData(with: StagedChangeset<[ReposListSectionModel]>, completion: @escaping () -> Void)", parameterMatchers: matchers))
 	    }
 	    
 	    func showProgressHUD() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
@@ -424,9 +487,9 @@ import Foundation
 	
 	    
 	    @discardableResult
-	    func updateCollectionViewData<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.__DoNotUse<([GitHubRepoViewData]), Void> where M1.MatchedType == [GitHubRepoViewData] {
-	        let matchers: [Cuckoo.ParameterMatcher<([GitHubRepoViewData])>] = [wrap(matchable: with) { $0 }]
-	        return cuckoo_manager.verify("updateCollectionViewData(with: [GitHubRepoViewData])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func updateCollectionViewData<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(with: M1, completion: M2) -> Cuckoo.__DoNotUse<(StagedChangeset<[ReposListSectionModel]>, () -> Void), Void> where M1.MatchedType == StagedChangeset<[ReposListSectionModel]>, M2.MatchedType == () -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(StagedChangeset<[ReposListSectionModel]>, () -> Void)>] = [wrap(matchable: with) { $0.0 }, wrap(matchable: completion) { $0.1 }]
+	        return cuckoo_manager.verify("updateCollectionViewData(with: StagedChangeset<[ReposListSectionModel]>, completion: @escaping () -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -450,7 +513,7 @@ import Foundation
     
 
     
-     func updateCollectionViewData(with: [GitHubRepoViewData])   {
+     func updateCollectionViewData(with: StagedChangeset<[ReposListSectionModel]>, completion: @escaping () -> Void)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -465,7 +528,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-14 03:54:33 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-14 12:34:18 +0000
 
 //
 //  ReposListView.swift
@@ -503,6 +566,21 @@ import UIKit
     
 
     
+    
+    
+     func showRepositoryDetailView(url: String)  {
+        
+    return cuckoo_manager.call("showRepositoryDetailView(url: String)",
+            parameters: (url),
+            escapingParameters: (url),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.showRepositoryDetailView(url: url))
+        
+    }
+    
 
 	 struct __StubbingProxy_ReposListRouterProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -511,6 +589,11 @@ import UIKit
 	        self.cuckoo_manager = manager
 	    }
 	    
+	    
+	    func showRepositoryDetailView<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListRouterProtocol.self, method: "showRepositoryDetailView(url: String)", parameterMatchers: matchers))
+	    }
 	    
 	}
 
@@ -528,6 +611,12 @@ import UIKit
 	    
 	
 	    
+	    @discardableResult
+	    func showRepositoryDetailView<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
+	        return cuckoo_manager.verify("showRepositoryDetailView(url: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -537,10 +626,14 @@ import UIKit
     
 
     
+     func showRepositoryDetailView(url: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-14 03:54:33 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-14 12:34:18 +0000
 
 //
 //  ReposListView.swift
@@ -554,3 +647,79 @@ import Cuckoo
 
 import DifferenceKit
 import UIKit
+
+// MARK: - Mocks generated from file: GitHubClient/View/WebView/Router/WebViewRouter.swift at 2021-05-14 12:34:18 +0000
+
+//
+//  WebViewView.swift
+//
+//  Created by branch10480 on 2021/5/14.
+//  Copyright © 2021 branch10480. All rights reserved.
+//
+
+import Cuckoo
+@testable import GitHubClient
+
+import SafariServices
+import UIKit
+
+
+ class MockWebViewRouterProtocol: WebViewRouterProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = WebViewRouterProtocol
+    
+     typealias Stubbing = __StubbingProxy_WebViewRouterProtocol
+     typealias Verification = __VerificationProxy_WebViewRouterProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: WebViewRouterProtocol?
+
+     func enableDefaultImplementation(_ stub: WebViewRouterProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+
+	 struct __StubbingProxy_WebViewRouterProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	}
+
+	 struct __VerificationProxy_WebViewRouterProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	}
+}
+
+ class WebViewRouterProtocolStub: WebViewRouterProtocol {
+    
+
+    
+
+    
+}
+

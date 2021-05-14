@@ -1,0 +1,113 @@
+//
+//  ReposListPresenterSpec.swift
+//  GitHubClientTests
+//
+//  Created by branch10480 on 2021/05/12.
+//
+
+import Foundation
+import Quick
+import Nimble
+import Cuckoo
+@testable import GitHubClient
+
+class ReposListPresenterSpec: QuickSpec {
+
+    private var presenter: ReposListPresenterProtocol!
+    private var router: MockReposListRouterProtocol!
+    private var interactor: MockReposListInteractorProtocol!
+    private var presenterOutput: MockReposListPresenterOutputProtocol!
+
+    override func spec() {
+        
+        describe("ReposListPresenter") {
+            beforeEach {
+                let presenterOutput = MockReposListPresenterOutputProtocol()
+                let router = MockReposListRouterProtocol()
+                let interactor = MockReposListInteractorProtocol()
+                let presenter = ReposListPresenter(
+                    view: presenterOutput,
+                    router: router,
+                    interactor: interactor
+                )
+                self.presenter = presenter
+                self.router = router
+                self.interactor = interactor
+                self.presenterOutput = presenterOutput
+
+                stub(self.presenterOutput, block: { proxy in
+                    when(proxy.showProgressHUD()).thenDoNothing()
+                    when(proxy.dismissProgressHUD()).thenDoNothing()
+                })
+            }
+            context("正常系") {
+                it("画面表示時にリポジトリリスト取得を行い、成功の場合リスト表示を行う") {
+                    // スタブの設定
+                    stub(self.interactor, block: { proxy in
+                        when(proxy.fetchRepos(language: any(), completion: anyClosure()))
+                            .then { language, completion in
+                                completion(.success([]))
+                            }
+                    })
+                    stub(self.presenterOutput, block: { proxy in
+                        when(proxy.updateCollectionViewData(
+                                with: any(),
+                                completion: anyClosure())
+                        )
+                        .thenDoNothing()
+                    })
+
+                    // テスト開始
+                    self.presenter.viewDidLoad()
+
+                    // 検証
+                    verify(self.presenterOutput, times(1))
+                        .updateCollectionViewData(with: any(), completion: anyClosure())
+                    verify(self.interactor, times(1))
+                        .fetchRepos(language: "swift", completion: anyClosure())
+                    verify(self.presenterOutput, times(1)).showProgressHUD()
+                    verify(self.presenterOutput, times(1)).dismissProgressHUD()
+                }
+            }
+            context("正常系") {
+                it("リポジトリセルをタップするとリポジトリ詳細画面に遷移する") {
+                    let dummyRepos = [
+                        GitHubRepo(
+                            id: 12345678,
+                            fullName: "dummy",
+                            stargazersCount: 3,
+                            htmlUrl: "https://dummy.com")
+                    ]
+                    // スタブの設定
+                    stub(self.router) { proxy in
+                        when(proxy.showRepositoryDetailView(url: any())).thenDoNothing()
+                    }
+                    stub(self.interactor) { proxy in
+                        when(proxy.fetchRepos(language: any(), completion: anyClosure())).then { _, completion in
+                            completion(.success(dummyRepos))
+                        }
+                    }
+                    stub(self.presenterOutput, block: { proxy in
+                        when(proxy.updateCollectionViewData(
+                                with: any(),
+                                completion: anyClosure())
+                        )
+                        .then { _, completion in
+                            completion()
+                        }
+                    })
+
+                    // テスト開始
+                    self.presenter.viewDidLoad()
+                    sleep(1)
+                    self.presenter.didTapRepoRow(indexPath: .init(row: 0, section: 0))
+
+                    // 検証
+                    verify(self.router, times(1))
+                        .showRepositoryDetailView(url: "https://dummy.com")
+                }
+            }
+        }
+
+    }
+}

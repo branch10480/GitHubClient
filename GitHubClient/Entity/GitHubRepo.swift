@@ -8,6 +8,8 @@
 import Foundation
 
 struct GitHubRepo: Codable {
+    let id: Int
     let fullName: String
     let stargazersCount: Int
+    let htmlUrl: String
 }

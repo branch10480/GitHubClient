@@ -16,7 +16,6 @@ final class ReposListViewController: UIViewController {
     private enum CellName {
         static let list = "repoListCell"
     }
-    private var dataSource: [ReposListSectionModel] = []
     
     func inject(
         presenter: ReposListPresenterProtocol
@@ -27,11 +26,7 @@ final class ReposListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter.viewDidAppear()
+        presenter.viewDidLoad()
     }
     
     private func setup() {
@@ -86,13 +81,13 @@ final class ReposListViewController: UIViewController {
 }
 
 extension ReposListViewController: ReposListPresenterOutputProtocol {
-    func updateCollectionViewData(with viewData: [GitHubRepoViewData]) {
-        let source = dataSource
-        let target = [ReposListSectionModel(model: .repo, elements: viewData)]
-        let changeSet = StagedChangeset(source: source, target: target)
+    func updateCollectionViewData(
+        with changeSet: StagedChangeset<[ReposListSectionModel]>,
+        completion: @escaping () -> Void
+    ) {
         DispatchQueue.main.async { [weak self] in
-            self?.collectionView.reload(using: changeSet) { [weak self] data in
-                self?.dataSource = data
+            self?.collectionView.reload(using: changeSet) { _ in
+                completion()
             }
         }
     }
@@ -110,7 +105,7 @@ extension ReposListViewController: ReposListPresenterOutputProtocol {
 
 extension ReposListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let section = dataSource[indexPath.section]
+        let section = presenter.dataSource[indexPath.section]
         let sectionId = section.model
         let item = section.elements[indexPath.row]
         switch sectionId {
@@ -121,10 +116,10 @@ extension ReposListViewController: UICollectionViewDataSource {
         }
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return dataSource.count
+        return presenter.dataSource.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource[section].elements.count
+        return presenter.dataSource[section].elements.count
     }
 }
 
@@ -132,32 +127,6 @@ extension ReposListViewController: UICollectionViewDataSource {
 
 extension ReposListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
-}
-
-// MARK: - DifferenceKit Definitions
-
-typealias ReposListSectionModel = ArraySection<SectionId, GitHubRepoViewData>
-
-enum SectionId: Differentiable {
-    case repo
-}
-
-struct GitHubRepoViewData: Differentiable {
-    let fullName: String
-    let stargazersCount: Int
-    
-    init(_ repo: GitHubRepo) {
-        fullName = repo.fullName
-        stargazersCount = repo.stargazersCount
-    }
-    
-    var differenceIdentifier: String {
-        fullName
-    }
-    
-    func isContentEqual(to source: GitHubRepoViewData) -> Bool {
-        return fullName == source.fullName &&
-            stargazersCount == source.stargazersCount
+        presenter.didTapRepoRow(indexPath: indexPath)
     }
 }

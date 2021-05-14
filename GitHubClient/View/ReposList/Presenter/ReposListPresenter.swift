@@ -6,19 +6,27 @@
 //
 
 import Foundation
+import DifferenceKit
 
 protocol ReposListPresenterProtocol: AnyObject {
-    func viewDidAppear()
+    var dataSource: [ReposListSectionModel] { get }
+    func viewDidLoad()
+    func didTapRepoRow(indexPath: IndexPath)
 }
 
 protocol ReposListPresenterOutputProtocol: AnyObject {
-    func updateCollectionViewData(with: [GitHubRepoViewData])
+    func updateCollectionViewData(
+        with: StagedChangeset<[ReposListSectionModel]>,
+        completion: @escaping () -> Void
+    )
     func showProgressHUD()
     func dismissProgressHUD()
 }
 
 final class ReposListPresenter: ReposListPresenterProtocol {
-
+    
+    private(set) var dataSource: [ReposListSectionModel] = []
+    
     private weak var view: ReposListPresenterOutputProtocol?
     private let router: ReposListRouterProtocol
     private let interactor: ReposListInteractorProtocol
@@ -33,18 +41,58 @@ final class ReposListPresenter: ReposListPresenterProtocol {
         self.interactor = interactor
     }
 
-    func viewDidAppear() {
+    func viewDidLoad() {
         view?.showProgressHUD()
         interactor.fetchRepos(language: "swift") { [weak self] result in
-            self?.view?.dismissProgressHUD()
+            guard let self = self else { return }
+            self.view?.dismissProgressHUD()
             switch result {
             case .success(let data):
-                let viewData = data.map { GitHubRepoViewData($0) }
-                self?.view?.updateCollectionViewData(with: viewData)
+                let source = self.dataSource
+                let targetItems = data.map { GitHubRepoViewData($0) }
+                let target = [ReposListSectionModel(model: .repo, elements: targetItems)]
+                let changeSet = StagedChangeset(source: source, target: target)
+                self.view?.updateCollectionViewData(with: changeSet, completion: { [weak self] in
+                    self?.dataSource = target
+                })
             case .failure(let e):
                 print(e.localizedDescription)
             }
         }
     }
+    
+    func didTapRepoRow(indexPath: IndexPath) {
+        let viewData = dataSource[indexPath.section].elements[indexPath.row]
+        router.showRepositoryDetailView(url: viewData.original.htmlUrl)
+    }
 
+}
+
+// MARK: - DifferenceKit Definitions
+
+typealias ReposListSectionModel = ArraySection<SectionId, GitHubRepoViewData>
+
+enum SectionId: Differentiable {
+    case repo
+}
+
+struct GitHubRepoViewData: Differentiable {
+    let fullName: String
+    let stargazersCount: Int
+    let original: GitHubRepo
+    
+    init(_ repo: GitHubRepo) {
+        fullName = repo.fullName
+        stargazersCount = repo.stargazersCount
+        original = repo
+    }
+    
+    var differenceIdentifier: String {
+        fullName
+    }
+    
+    func isContentEqual(to source: GitHubRepoViewData) -> Bool {
+        return fullName == source.fullName &&
+            stargazersCount == source.stargazersCount
+    }
 }
