@@ -12,6 +12,7 @@ protocol ReposListPresenterProtocol: AnyObject {
     var dataSource: [ReposListSectionModel] { get }
     func viewDidLoad()
     func didTapRepoRow(indexPath: IndexPath)
+    func didScrollToBottom()
 }
 
 protocol ReposListPresenterOutputProtocol: AnyObject {
@@ -45,6 +46,20 @@ final class ReposListPresenter: ReposListPresenterProtocol {
     }
 
     func viewDidLoad() {
+        fetchRepos()
+    }
+    
+    func didTapRepoRow(indexPath: IndexPath) {
+        let viewData = dataSource[indexPath.section].elements[indexPath.row]
+        router.showRepositoryDetailView(url: viewData.original.htmlUrl)
+    }
+    
+    func didScrollToBottom() {
+        page += 1
+        fetchRepos()
+    }
+    
+    private func fetchRepos() {
         view?.showProgressHUD()
         interactor.fetchRepos(language: language, perPage: perPage, page: page) {
             [weak self] result in
@@ -64,11 +79,6 @@ final class ReposListPresenter: ReposListPresenterProtocol {
                 print(e.localizedDescription)
             }
         }
-    }
-    
-    func didTapRepoRow(indexPath: IndexPath) {
-        let viewData = dataSource[indexPath.section].elements[indexPath.row]
-        router.showRepositoryDetailView(url: viewData.original.htmlUrl)
     }
 
 }
