@@ -13,6 +13,7 @@ protocol ReposListPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapRepoRow(indexPath: IndexPath)
     func didScrollToBottom()
+    func refreshControlStart()
 }
 
 protocol ReposListPresenterOutputProtocol: AnyObject {
@@ -23,6 +24,7 @@ protocol ReposListPresenterOutputProtocol: AnyObject {
     func showProgressHUD()
     func dismissProgressHUD()
     func showErrorMessage(_: String)
+    func endRefreshControlRefreshing()
 }
 
 final class ReposListPresenter: ReposListPresenterProtocol {
@@ -65,9 +67,14 @@ final class ReposListPresenter: ReposListPresenterProtocol {
         fetchRepos()
     }
     
-    private func fetchRepos() {
+    private func fetchRepos(isRefreshing: Bool = false) {
         view?.showProgressHUD()
-        let page = page + 1
+        let page: Int
+        if isRefreshing {
+            page = 1
+        } else {
+            page = self.page + 1
+        }
         let perPage = perPage
         interactor.fetchRepos(language: language, perPage: perPage, page: page) {
             [weak self] result in
@@ -78,7 +85,12 @@ final class ReposListPresenter: ReposListPresenterProtocol {
             case .success(let data):
                 let source = self.dataSource
                 let sourceItems = source.first?.elements ?? []
-                let targetItems = sourceItems + data.items.map { GitHubRepoViewData($0) }
+                let targetItems: [GitHubRepoViewData]
+                if isRefreshing {
+                    targetItems = data.items.map { GitHubRepoViewData($0) }
+                } else {
+                    targetItems = sourceItems + data.items.map { GitHubRepoViewData($0) }
+                }
                 let target = [ReposListSectionModel(model: .repo, elements: targetItems)]
                 let changeSet = StagedChangeset(source: source, target: target)
                 self.view?.updateCollectionViewData(with: changeSet, completion: { [weak self] in
@@ -90,7 +102,12 @@ final class ReposListPresenter: ReposListPresenterProtocol {
                 self.view?.showErrorMessage(e.localizedDescription)
             }
             self.isLoading = false
+            self.view?.endRefreshControlRefreshing()
         }
+    }
+    
+    func refreshControlStart() {
+        fetchRepos(isRefreshing: true)
     }
 
 }

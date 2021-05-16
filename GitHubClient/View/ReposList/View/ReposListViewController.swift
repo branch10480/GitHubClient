@@ -16,6 +16,7 @@ final class ReposListViewController: UIViewController {
     private enum CellName {
         static let list = "repoListCell"
     }
+    private let refreshControl = UIRefreshControl()
     
     func inject(
         presenter: ReposListPresenterProtocol
@@ -41,6 +42,10 @@ final class ReposListViewController: UIViewController {
         // DataSource and Delegate
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        // Refresh Control.
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(self.handleRefreshControl), for: .valueChanged)
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -78,6 +83,10 @@ final class ReposListViewController: UIViewController {
         section.interGroupSpacing = 0
         return section
     }
+    
+    @objc private func handleRefreshControl() {
+        presenter.refreshControlStart()
+    }
 }
 
 extension ReposListViewController: ReposListPresenterOutputProtocol {
@@ -104,6 +113,12 @@ extension ReposListViewController: ReposListPresenterOutputProtocol {
         let ac = UIAlertController(title: "Error".localized, message: message, preferredStyle: .alert)
         ac.addAction(.init(title: "OK".localized, style: .default, handler: nil))
         present(ac, animated: true, completion: nil)
+    }
+    
+    func endRefreshControlRefreshing() {
+        DispatchQueue.main.async { [weak self] in
+            self?.refreshControl.endRefreshing()
+        }
     }
 }
 

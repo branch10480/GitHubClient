@@ -38,11 +38,20 @@ class ReposListPresenterSpec: QuickSpec {
                 stub(self.presenterOutput, block: { proxy in
                     when(proxy.showProgressHUD()).thenDoNothing()
                     when(proxy.dismissProgressHUD()).thenDoNothing()
+                    when(proxy.endRefreshControlRefreshing()).thenDoNothing()
+                    when(proxy.showErrorMessage(any())).thenDoNothing()
+                    when(proxy.updateCollectionViewData(
+                            with: any(),
+                            completion: anyClosure())
+                    )
+                    .then { _, completion in
+                        completion()
+                    }
                 })
             }
 
             context("正常系") {
-                it("画面表示時にリポジトリリスト取得を行い、成功の場合リスト表示を行う") {
+                it("画面表示時にリポジトリリスト取得を行い、成功の場合リスト表示を行う。またリフレッシュコントロールのendRefreshing処理を行う。") {
                     // スタブの設定
                     stub(self.interactor, block: { proxy in
                         when(
@@ -59,13 +68,6 @@ class ReposListPresenterSpec: QuickSpec {
                             completion(.success(response))
                         }
                     })
-                    stub(self.presenterOutput, block: { proxy in
-                        when(proxy.updateCollectionViewData(
-                                with: any(),
-                                completion: anyClosure())
-                        )
-                        .thenDoNothing()
-                    })
 
                     // テスト開始
                     self.presenter.viewDidLoad()
@@ -81,11 +83,12 @@ class ReposListPresenterSpec: QuickSpec {
                     )
                     verify(self.presenterOutput, times(1)).showProgressHUD()
                     verify(self.presenterOutput, times(1)).dismissProgressHUD()
+                    verify(self.presenterOutput, times(1)).endRefreshControlRefreshing()
                 }
             }
             
             context("異常系") {
-                it("画面表示時にリポジトリリスト取得を行い、失敗の場合メッセージを表示する") {
+                it("画面表示時にリポジトリリスト取得を行い、失敗の場合メッセージを表示する。またリフレッシュコントロールのendRefreshing処理を行う。") {
                     // スタブの設定
                     stub(self.interactor, block: { proxy in
                         when(
@@ -100,20 +103,13 @@ class ReposListPresenterSpec: QuickSpec {
                             completion(.failure(GitHubClientError.failedToGetData))
                         }
                     })
-                    stub(self.presenterOutput, block: { proxy in
-                        when(proxy.updateCollectionViewData(
-                                with: any(),
-                                completion: anyClosure())
-                        )
-                        .thenDoNothing()
-                        when(proxy.showErrorMessage(any())).thenDoNothing()
-                    })
                     
                     // テスト開始
                     self.presenter.viewDidLoad()
 
                     // 検証
                     verify(self.presenterOutput, times(1)).showErrorMessage(any())
+                    verify(self.presenterOutput, times(1)).endRefreshControlRefreshing()
                 }
             }
 
@@ -171,13 +167,6 @@ class ReposListPresenterSpec: QuickSpec {
                             completion(.success(response))
                         }
                     })
-                    stub(self.presenterOutput, block: { proxy in
-                        when(proxy.updateCollectionViewData(
-                                with: any(),
-                                completion: anyClosure())
-                        )
-                        .thenDoNothing()
-                    })
                     
                     // テスト開始
                     self.presenter.viewDidLoad()
@@ -222,15 +211,6 @@ class ReposListPresenterSpec: QuickSpec {
                             completion(.success(response))
                         }
                     })
-                    stub(self.presenterOutput, block: { proxy in
-                        when(proxy.updateCollectionViewData(
-                                with: any(),
-                                completion: anyClosure())
-                        )
-                        .then { _, completion in
-                            completion()
-                        }
-                    })
                     
                     // テスト開始
                     self.presenter.viewDidLoad()
@@ -255,7 +235,57 @@ class ReposListPresenterSpec: QuickSpec {
                         page: any(),
                         completion: anyClosure()
                     )
+                }
+            }
+
+            context("正常系") {
+                it("リフレッシュコントロールを引っ張った際は1ページ目を読み込み直す") {
+                    // スタブの設定
+                    stub(self.interactor, block: { proxy in
+                        when(proxy.fetchRepos(
+                                language: any(),
+                                perPage: any(),
+                                page: any(),
+                                completion: anyClosure())
+                        )
+                        .then { _, _, _, completion in
+                            let response = GitHubReposResponse(totalCount: 10, items: [])
+                            completion(.success(response))
+                        }
+                    })
+                    stub(self.presenterOutput, block: { proxy in
+                        when(proxy.updateCollectionViewData(
+                                with: any(),
+                                completion: anyClosure())
+                        )
+                        .then { _, completion in
+                            completion()
+                        }
+                    })
                     
+                    // テスト開始
+                    self.presenter.viewDidLoad()
+                    sleep(1)
+                    
+                    // 検証
+                    verify(self.interactor, times(1)).fetchRepos(
+                        language: any(),
+                        perPage: any(),
+                        page: 1,
+                        completion: anyClosure()
+                    )
+                    
+                    // リフレッシュ
+                    self.presenter.refreshControlStart()
+                    sleep(1)
+                    
+                    // 検証
+                    verify(self.interactor, times(2)).fetchRepos(
+                        language: any(),
+                        perPage: any(),
+                        page: 1,
+                        completion: anyClosure()
+                    )
                 }
             }
         }
