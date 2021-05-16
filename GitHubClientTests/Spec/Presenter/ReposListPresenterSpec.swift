@@ -83,6 +83,39 @@ class ReposListPresenterSpec: QuickSpec {
                     verify(self.presenterOutput, times(1)).dismissProgressHUD()
                 }
             }
+            
+            context("異常系") {
+                it("画面表示時にリポジトリリスト取得を行い、失敗の場合メッセージを表示する") {
+                    // スタブの設定
+                    stub(self.interactor, block: { proxy in
+                        when(
+                            proxy.fetchRepos(
+                                language: any(),
+                                perPage: any(),
+                                page: any(),
+                                completion: anyClosure()
+                            )
+                        )
+                        .then { _, _, _, completion in
+                            completion(.failure(GitHubClientError.failedToGetData))
+                        }
+                    })
+                    stub(self.presenterOutput, block: { proxy in
+                        when(proxy.updateCollectionViewData(
+                                with: any(),
+                                completion: anyClosure())
+                        )
+                        .thenDoNothing()
+                        when(proxy.showErrorMessage(any())).thenDoNothing()
+                    })
+                    
+                    // テスト開始
+                    self.presenter.viewDidLoad()
+
+                    // 検証
+                    verify(self.presenterOutput, times(1)).showErrorMessage(any())
+                }
+            }
 
             context("正常系") {
                 it("リポジトリセルをタップするとリポジトリ詳細画面に遷移する") {

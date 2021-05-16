@@ -99,6 +99,12 @@ extension ReposListViewController: ReposListPresenterOutputProtocol {
     func dismissProgressHUD() {
         progressHUD.dismiss()
     }
+    
+    func showErrorMessage(_ message: String) {
+        let ac = UIAlertController(title: "Error".localized, message: message, preferredStyle: .alert)
+        ac.addAction(.init(title: "OK".localized, style: .default, handler: nil))
+        present(ac, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UICollectionViewDataSource

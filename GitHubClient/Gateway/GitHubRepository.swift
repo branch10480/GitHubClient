@@ -9,8 +9,18 @@ import Foundation
 import Alamofire
 
 enum GitHubClientError: Error {
-    case failedGettingData
+    case failedToGetData
     case parseError
+}
+extension GitHubClientError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .failedToGetData:
+            return "GitHubClientError.failedToGetData".localized
+        case .parseError:
+            return "GitHubClientError.parseError".localized
+        }
+    }
 }
 
 protocol GitHubRepositoryProtocol {
@@ -39,7 +49,7 @@ final class GitHubRepository: GitHubRepositoryProtocol {
         print(url)
         AF.request(url, method: .get).responseJSON { response in
             guard let data = response.data else {
-                completion(.failure(GitHubClientError.failedGettingData))
+                completion(.failure(GitHubClientError.failedToGetData))
                 return
             }
             let decoder = JSONDecoder()
@@ -47,8 +57,8 @@ final class GitHubRepository: GitHubRepositoryProtocol {
             do {
                 let gitHubResponse = try decoder.decode(GitHubReposResponse.self, from: data)
                 completion(.success(gitHubResponse))
-            } catch(let e) {
-                completion(.failure(e))
+            } catch {
+                completion(.failure(GitHubClientError.parseError))
             }
         }
     }

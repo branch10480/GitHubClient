@@ -7,3 +7,7 @@
 */
 
 "ReposListView.title" = "GitHub Repositories";
+"Error" = "エラー";
+"OK" = "OK";
+"GitHubClientError.failedToGetData" = "データの取得に失敗しました";
+"GitHubClientError.parseError" = "データの変換に失敗しました";

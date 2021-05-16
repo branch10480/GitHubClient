@@ -22,6 +22,7 @@ protocol ReposListPresenterOutputProtocol: AnyObject {
     )
     func showProgressHUD()
     func dismissProgressHUD()
+    func showErrorMessage(_: String)
 }
 
 final class ReposListPresenter: ReposListPresenterProtocol {
@@ -86,7 +87,7 @@ final class ReposListPresenter: ReposListPresenterProtocol {
                 self.reachedToEnd = !data.hasNextPage(currentPage: page, perPage: perPage)
                 self.page = page
             case .failure(let e):
-                print(e.localizedDescription)
+                self.view?.showErrorMessage(e.localizedDescription)
             }
             self.isLoading = false
         }

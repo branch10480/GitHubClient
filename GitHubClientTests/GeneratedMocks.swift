@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-16 12:18:18 +0000
+// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-16 12:44:32 +0000
 
 //
 //  GitHubRepository.swift
@@ -104,7 +104,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-16 12:18:18 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-16 12:44:32 +0000
 
 //
 //  ReposListUseCase.swift
@@ -209,7 +209,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-16 12:18:18 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-16 12:44:32 +0000
 
 //
 //  ReposListPresenter.swift
@@ -476,6 +476,21 @@ import Foundation
         
     }
     
+    
+    
+     func showErrorMessage(_ parameter0: String)  {
+        
+    return cuckoo_manager.call("showErrorMessage(_: String)",
+            parameters: (parameter0),
+            escapingParameters: (parameter0),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.showErrorMessage(parameter0))
+        
+    }
+    
 
 	 struct __StubbingProxy_ReposListPresenterOutputProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -498,6 +513,11 @@ import Foundation
 	    func dismissProgressHUD() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "dismissProgressHUD()", parameterMatchers: matchers))
+	    }
+	    
+	    func showErrorMessage<M1: Cuckoo.Matchable>(_ parameter0: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: parameter0) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListPresenterOutputProtocol.self, method: "showErrorMessage(_: String)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -534,6 +554,12 @@ import Foundation
 	        return cuckoo_manager.verify("dismissProgressHUD()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func showErrorMessage<M1: Cuckoo.Matchable>(_ parameter0: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: parameter0) { $0 }]
+	        return cuckoo_manager.verify("showErrorMessage(_: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -555,10 +581,14 @@ import Foundation
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
+     func showErrorMessage(_ parameter0: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-16 12:18:18 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-16 12:44:32 +0000
 
 //
 //  ReposListView.swift
@@ -663,7 +693,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-16 12:18:18 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-16 12:44:32 +0000
 
 //
 //  ReposListView.swift
@@ -678,7 +708,7 @@ import Cuckoo
 import DifferenceKit
 import UIKit
 
-// MARK: - Mocks generated from file: GitHubClient/View/WebView/Router/WebViewRouter.swift at 2021-05-16 12:18:18 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/WebView/Router/WebViewRouter.swift at 2021-05-16 12:44:32 +0000
 
 //
 //  WebViewView.swift
