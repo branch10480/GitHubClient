@@ -181,6 +181,8 @@ class ReposListPresenterSpec: QuickSpec {
                     
                     // テスト開始
                     self.presenter.viewDidLoad()
+                    
+                    // 検証
                     verify(self.interactor, times(1)).fetchRepos(
                         language: "swift",
                         perPage: any(),
@@ -201,6 +203,59 @@ class ReposListPresenterSpec: QuickSpec {
                     )
                     verify(self.presenterOutput, times(2))
                         .updateCollectionViewData(with: any(), completion: anyClosure())
+                }
+            }
+            
+
+            context("正常系") {
+                it("最後まで読み込んだ場合は、以降データ取得を行わない") {
+                    // スタブの設定
+                    stub(self.interactor, block: { proxy in
+                        when(proxy.fetchRepos(
+                                language: any(),
+                                perPage: any(),
+                                page: any(),
+                                completion: anyClosure())
+                        )
+                        .then { _, _, _, completion in
+                            let response = GitHubReposResponse(totalCount: 10, items: [])
+                            completion(.success(response))
+                        }
+                    })
+                    stub(self.presenterOutput, block: { proxy in
+                        when(proxy.updateCollectionViewData(
+                                with: any(),
+                                completion: anyClosure())
+                        )
+                        .then { _, completion in
+                            completion()
+                        }
+                    })
+                    
+                    // テスト開始
+                    self.presenter.viewDidLoad()
+                    sleep(1)
+                    
+                    // 検証
+                    verify(self.interactor, times(1)).fetchRepos(
+                        language: any(),
+                        perPage: any(),
+                        page: any(),
+                        completion: anyClosure()
+                    )
+                    
+                    // 最後までスクロール
+                    self.presenter.didScrollToBottom()
+                    sleep(1)
+                    
+                    // 検証 - 呼ばれないのでカウントは1回のまま
+                    verify(self.interactor, times(1)).fetchRepos(
+                        language: any(),
+                        perPage: any(),
+                        page: any(),
+                        completion: anyClosure()
+                    )
+                    
                 }
             }
         }
