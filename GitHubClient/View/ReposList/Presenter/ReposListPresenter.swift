@@ -31,9 +31,11 @@ final class ReposListPresenter: ReposListPresenterProtocol {
     private weak var view: ReposListPresenterOutputProtocol?
     private let router: ReposListRouterProtocol
     private let interactor: ReposListInteractorProtocol
-    private var page: Int = 1
+    private var page: Int = 0
     private let perPage: Int = 30
     private let language = "swift"
+    private var reachedToEnd: Bool = false
+    private var isLoading: Bool = false
     
     init(
         view: ReposListPresenterOutputProtocol,
@@ -55,12 +57,17 @@ final class ReposListPresenter: ReposListPresenterProtocol {
     }
     
     func didScrollToBottom() {
-        page += 1
+        if reachedToEnd || isLoading {
+            return
+        }
+        isLoading = true
         fetchRepos()
     }
     
     private func fetchRepos() {
         view?.showProgressHUD()
+        let page = page + 1
+        let perPage = perPage
         interactor.fetchRepos(language: language, perPage: perPage, page: page) {
             [weak self] result in
             
@@ -69,15 +76,19 @@ final class ReposListPresenter: ReposListPresenterProtocol {
             switch result {
             case .success(let data):
                 let source = self.dataSource
-                let targetItems = data.map { GitHubRepoViewData($0) }
+                let sourceItems = source.first?.elements ?? []
+                let targetItems = sourceItems + data.items.map { GitHubRepoViewData($0) }
                 let target = [ReposListSectionModel(model: .repo, elements: targetItems)]
                 let changeSet = StagedChangeset(source: source, target: target)
                 self.view?.updateCollectionViewData(with: changeSet, completion: { [weak self] in
                     self?.dataSource = target
                 })
+                self.reachedToEnd = !data.hasNextPage(currentPage: page, perPage: perPage)
+                self.page = page
             case .failure(let e):
                 print(e.localizedDescription)
             }
+            self.isLoading = false
         }
     }
 

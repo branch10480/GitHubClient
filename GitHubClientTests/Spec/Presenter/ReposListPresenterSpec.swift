@@ -40,6 +40,7 @@ class ReposListPresenterSpec: QuickSpec {
                     when(proxy.dismissProgressHUD()).thenDoNothing()
                 })
             }
+
             context("正常系") {
                 it("画面表示時にリポジトリリスト取得を行い、成功の場合リスト表示を行う") {
                     // スタブの設定
@@ -53,7 +54,9 @@ class ReposListPresenterSpec: QuickSpec {
                             )
                         )
                         .then { _, _, _, completion in
-                            completion(.success([]))
+                            let items = [GitHubRepo(id: 1, fullName: "hoge", stargazersCount: 1, htmlUrl: "https://dummy.com")]
+                            let response = GitHubReposResponse(totalCount: 1, items: items)
+                            completion(.success(response))
                         }
                     })
                     stub(self.presenterOutput, block: { proxy in
@@ -80,15 +83,11 @@ class ReposListPresenterSpec: QuickSpec {
                     verify(self.presenterOutput, times(1)).dismissProgressHUD()
                 }
             }
+
             context("正常系") {
                 it("リポジトリセルをタップするとリポジトリ詳細画面に遷移する") {
-                    let dummyRepos = [
-                        GitHubRepo(
-                            id: 12345678,
-                            fullName: "dummy",
-                            stargazersCount: 3,
-                            htmlUrl: "https://dummy.com")
-                    ]
+                    let items = [GitHubRepo(id: 1, fullName: "hoge", stargazersCount: 1, htmlUrl: "https://dummy.com")]
+                    let response = GitHubReposResponse(totalCount: 1, items: items)
                     // スタブの設定
                     stub(self.router) { proxy in
                         when(proxy.showRepositoryDetailView(url: any())).thenDoNothing()
@@ -100,7 +99,7 @@ class ReposListPresenterSpec: QuickSpec {
                                 page: any(),
                                 completion: anyClosure())
                         ).then { _, _, _, completion in
-                            completion(.success(dummyRepos))
+                            completion(.success(response))
                         }
                     }
                     stub(self.presenterOutput, block: { proxy in
@@ -123,6 +122,7 @@ class ReposListPresenterSpec: QuickSpec {
                         .showRepositoryDetailView(url: "https://dummy.com")
                 }
             }
+
             context("正常系") {
                 it("一番下までスクロールすると次のデータを取得し、表示を更新する") {
                     // スタブの設定
@@ -134,7 +134,8 @@ class ReposListPresenterSpec: QuickSpec {
                                 completion: anyClosure())
                         )
                         .then { _, _, _, completion in
-                            completion(.success([]))
+                            let response = GitHubReposResponse(totalCount: 100, items: [])
+                            completion(.success(response))
                         }
                     })
                     stub(self.presenterOutput, block: { proxy in
@@ -167,10 +168,8 @@ class ReposListPresenterSpec: QuickSpec {
                     )
                     verify(self.presenterOutput, times(2))
                         .updateCollectionViewData(with: any(), completion: anyClosure())
-                    
                 }
             }
         }
-
     }
 }

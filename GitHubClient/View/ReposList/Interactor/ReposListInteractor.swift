@@ -12,7 +12,7 @@ protocol ReposListInteractorProtocol {
         language: String,
         perPage: Int,
         page: Int,
-        completion: @escaping (Result<[GitHubRepo], Error>) -> Void
+        completion: @escaping (Result<GitHubReposResponse, Error>) -> Void
     )
 }
 
@@ -28,7 +28,7 @@ final class ReposListInteractor: ReposListInteractorProtocol {
         language: String,
         perPage: Int,
         page: Int,
-        completion: @escaping (Result<[GitHubRepo], Error>) -> Void
+        completion: @escaping (Result<GitHubReposResponse, Error>) -> Void
     ) {
         repository.fetchRepos(language: language, perPage: perPage, page: page) { result in
             switch result {

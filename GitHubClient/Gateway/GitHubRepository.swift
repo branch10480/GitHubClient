@@ -18,7 +18,7 @@ protocol GitHubRepositoryProtocol {
         language: String,
         perPage: Int,
         page: Int,
-        completion: @escaping (Result<[GitHubRepo], Error>) -> Void
+        completion: @escaping (Result<GitHubReposResponse, Error>) -> Void
     )
 }
 
@@ -30,7 +30,7 @@ final class GitHubRepository: GitHubRepositoryProtocol {
         language: String,
         perPage: Int,
         page: Int,
-        completion: @escaping (Result<[GitHubRepo], Error>) -> Void
+        completion: @escaping (Result<GitHubReposResponse, Error>) -> Void
     ) {
         let q = "language:\(language)"
         var urlString = endPoint + "/search/repositories"
@@ -45,8 +45,8 @@ final class GitHubRepository: GitHubRepositoryProtocol {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             do {
-                let items = try decoder.decode(GitHubReposResponse.self, from: data).items
-                completion(.success(items))
+                let gitHubResponse = try decoder.decode(GitHubReposResponse.self, from: data)
+                completion(.success(gitHubResponse))
             } catch(let e) {
                 completion(.failure(e))
             }

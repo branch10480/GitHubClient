@@ -123,10 +123,19 @@ extension ReposListViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDelegate
 
 extension ReposListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter.didTapRepoRow(indexPath: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let section = presenter.dataSource.last else {
+            return
+        }
+        if indexPath.row == section.elements.count - 1 {
+            presenter.didScrollToBottom()
+        }
     }
 }

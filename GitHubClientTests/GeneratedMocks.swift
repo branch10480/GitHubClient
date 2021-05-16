@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-16 11:26:40 +0000
+// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-16 12:18:18 +0000
 
 //
 //  GitHubRepository.swift
@@ -39,9 +39,9 @@ import Foundation
     
     
     
-     func fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)  {
+     func fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)  {
         
-    return cuckoo_manager.call("fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)",
+    return cuckoo_manager.call("fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)",
             parameters: (language, perPage, page, completion),
             escapingParameters: (language, perPage, page, completion),
             superclassCall:
@@ -61,9 +61,9 @@ import Foundation
 	    }
 	    
 	    
-	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable>(language: M1, perPage: M2, page: M3, completion: M4) -> Cuckoo.ProtocolStubNoReturnFunction<(String, Int, Int, (Result<[GitHubRepo], Error>) -> Void)> where M1.MatchedType == String, M2.MatchedType == Int, M3.MatchedType == Int, M4.MatchedType == (Result<[GitHubRepo], Error>) -> Void {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, Int, Int, (Result<[GitHubRepo], Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: perPage) { $0.1 }, wrap(matchable: page) { $0.2 }, wrap(matchable: completion) { $0.3 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGitHubRepositoryProtocol.self, method: "fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)", parameterMatchers: matchers))
+	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable>(language: M1, perPage: M2, page: M3, completion: M4) -> Cuckoo.ProtocolStubNoReturnFunction<(String, Int, Int, (Result<GitHubReposResponse, Error>) -> Void)> where M1.MatchedType == String, M2.MatchedType == Int, M3.MatchedType == Int, M4.MatchedType == (Result<GitHubReposResponse, Error>) -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, Int, Int, (Result<GitHubReposResponse, Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: perPage) { $0.1 }, wrap(matchable: page) { $0.2 }, wrap(matchable: completion) { $0.3 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGitHubRepositoryProtocol.self, method: "fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -83,9 +83,9 @@ import Foundation
 	
 	    
 	    @discardableResult
-	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable>(language: M1, perPage: M2, page: M3, completion: M4) -> Cuckoo.__DoNotUse<(String, Int, Int, (Result<[GitHubRepo], Error>) -> Void), Void> where M1.MatchedType == String, M2.MatchedType == Int, M3.MatchedType == Int, M4.MatchedType == (Result<[GitHubRepo], Error>) -> Void {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, Int, Int, (Result<[GitHubRepo], Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: perPage) { $0.1 }, wrap(matchable: page) { $0.2 }, wrap(matchable: completion) { $0.3 }]
-	        return cuckoo_manager.verify("fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable>(language: M1, perPage: M2, page: M3, completion: M4) -> Cuckoo.__DoNotUse<(String, Int, Int, (Result<GitHubReposResponse, Error>) -> Void), Void> where M1.MatchedType == String, M2.MatchedType == Int, M3.MatchedType == Int, M4.MatchedType == (Result<GitHubReposResponse, Error>) -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, Int, Int, (Result<GitHubReposResponse, Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: perPage) { $0.1 }, wrap(matchable: page) { $0.2 }, wrap(matchable: completion) { $0.3 }]
+	        return cuckoo_manager.verify("fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -97,14 +97,14 @@ import Foundation
     
 
     
-     func fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)   {
+     func fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-16 11:26:40 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-16 12:18:18 +0000
 
 //
 //  ReposListUseCase.swift
@@ -144,9 +144,9 @@ import Foundation
     
     
     
-     func fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)  {
+     func fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)  {
         
-    return cuckoo_manager.call("fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)",
+    return cuckoo_manager.call("fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)",
             parameters: (language, perPage, page, completion),
             escapingParameters: (language, perPage, page, completion),
             superclassCall:
@@ -166,9 +166,9 @@ import Foundation
 	    }
 	    
 	    
-	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable>(language: M1, perPage: M2, page: M3, completion: M4) -> Cuckoo.ProtocolStubNoReturnFunction<(String, Int, Int, (Result<[GitHubRepo], Error>) -> Void)> where M1.MatchedType == String, M2.MatchedType == Int, M3.MatchedType == Int, M4.MatchedType == (Result<[GitHubRepo], Error>) -> Void {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, Int, Int, (Result<[GitHubRepo], Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: perPage) { $0.1 }, wrap(matchable: page) { $0.2 }, wrap(matchable: completion) { $0.3 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockReposListInteractorProtocol.self, method: "fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)", parameterMatchers: matchers))
+	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable>(language: M1, perPage: M2, page: M3, completion: M4) -> Cuckoo.ProtocolStubNoReturnFunction<(String, Int, Int, (Result<GitHubReposResponse, Error>) -> Void)> where M1.MatchedType == String, M2.MatchedType == Int, M3.MatchedType == Int, M4.MatchedType == (Result<GitHubReposResponse, Error>) -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, Int, Int, (Result<GitHubReposResponse, Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: perPage) { $0.1 }, wrap(matchable: page) { $0.2 }, wrap(matchable: completion) { $0.3 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockReposListInteractorProtocol.self, method: "fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -188,9 +188,9 @@ import Foundation
 	
 	    
 	    @discardableResult
-	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable>(language: M1, perPage: M2, page: M3, completion: M4) -> Cuckoo.__DoNotUse<(String, Int, Int, (Result<[GitHubRepo], Error>) -> Void), Void> where M1.MatchedType == String, M2.MatchedType == Int, M3.MatchedType == Int, M4.MatchedType == (Result<[GitHubRepo], Error>) -> Void {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, Int, Int, (Result<[GitHubRepo], Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: perPage) { $0.1 }, wrap(matchable: page) { $0.2 }, wrap(matchable: completion) { $0.3 }]
-	        return cuckoo_manager.verify("fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func fetchRepos<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable>(language: M1, perPage: M2, page: M3, completion: M4) -> Cuckoo.__DoNotUse<(String, Int, Int, (Result<GitHubReposResponse, Error>) -> Void), Void> where M1.MatchedType == String, M2.MatchedType == Int, M3.MatchedType == Int, M4.MatchedType == (Result<GitHubReposResponse, Error>) -> Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, Int, Int, (Result<GitHubReposResponse, Error>) -> Void)>] = [wrap(matchable: language) { $0.0 }, wrap(matchable: perPage) { $0.1 }, wrap(matchable: page) { $0.2 }, wrap(matchable: completion) { $0.3 }]
+	        return cuckoo_manager.verify("fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -202,14 +202,14 @@ import Foundation
     
 
     
-     func fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<[GitHubRepo], Error>) -> Void)   {
+     func fetchRepos(language: String, perPage: Int, page: Int, completion: @escaping (Result<GitHubReposResponse, Error>) -> Void)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-16 11:26:40 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-16 12:18:18 +0000
 
 //
 //  ReposListPresenter.swift
@@ -558,7 +558,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-16 11:26:40 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-16 12:18:18 +0000
 
 //
 //  ReposListView.swift
@@ -663,7 +663,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-16 11:26:40 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-16 12:18:18 +0000
 
 //
 //  ReposListView.swift
@@ -678,7 +678,7 @@ import Cuckoo
 import DifferenceKit
 import UIKit
 
-// MARK: - Mocks generated from file: GitHubClient/View/WebView/Router/WebViewRouter.swift at 2021-05-16 11:26:40 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/WebView/Router/WebViewRouter.swift at 2021-05-16 12:18:18 +0000
 
 //
 //  WebViewView.swift
