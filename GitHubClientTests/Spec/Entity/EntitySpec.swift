@@ -38,7 +38,7 @@ final class EntitySpec: QuickSpec {
                         try! self.jsonDecoder.decode(GitHubReposResponse.self, from: data)
                     expect(response.items[0].id).to(equal(21700699))
                     expect(response.items[0].fullName).to(equal("vsouza/awesome-ios"))
-                    expect(response.items[0].stargazersCount).to(equal(37436))
+                    expect(response.items[0].stargazersCount).to(equal(37456))
                     expect(response.items[0].htmlUrl)
                         .to(equal("https://github.com/vsouza/awesome-ios"))
                 }

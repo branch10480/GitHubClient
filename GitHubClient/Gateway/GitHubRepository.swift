@@ -34,8 +34,9 @@ final class GitHubRepository: GitHubRepositoryProtocol {
     ) {
         let q = "language:\(language)"
         var urlString = endPoint + "/search/repositories"
-        urlString += "?q=\(q)&page=\(page)&per_page=\(perPage)"
+        urlString += "?q=\(q)&sort=stars&order=desc&page=\(page)&per_page=\(perPage)"
         let url = URL(string: urlString)!
+        print(url)
         AF.request(url, method: .get).responseJSON { response in
             guard let data = response.data else {
                 completion(.failure(GitHubClientError.failedGettingData))

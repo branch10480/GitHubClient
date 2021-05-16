@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-14 15:18:27 +0000
+// MARK: - Mocks generated from file: GitHubClient/Gateway/GitHubRepository.swift at 2021-05-16 11:26:40 +0000
 
 //
 //  GitHubRepository.swift
@@ -104,7 +104,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-14 15:18:27 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Interactor/ReposListInteractor.swift at 2021-05-16 11:26:40 +0000
 
 //
 //  ReposListUseCase.swift
@@ -209,7 +209,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-14 15:18:27 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Presenter/ReposListPresenter.swift at 2021-05-16 11:26:40 +0000
 
 //
 //  ReposListPresenter.swift
@@ -558,7 +558,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-14 15:18:27 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/Router/ReposListRouter.swift at 2021-05-16 11:26:40 +0000
 
 //
 //  ReposListView.swift
@@ -663,7 +663,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-14 15:18:27 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/ReposList/View/ReposListViewController.swift at 2021-05-16 11:26:40 +0000
 
 //
 //  ReposListView.swift
@@ -678,7 +678,7 @@ import Cuckoo
 import DifferenceKit
 import UIKit
 
-// MARK: - Mocks generated from file: GitHubClient/View/WebView/Router/WebViewRouter.swift at 2021-05-14 15:18:27 +0000
+// MARK: - Mocks generated from file: GitHubClient/View/WebView/Router/WebViewRouter.swift at 2021-05-16 11:26:40 +0000
 
 //
 //  WebViewView.swift

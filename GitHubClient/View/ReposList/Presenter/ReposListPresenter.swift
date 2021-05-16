@@ -32,7 +32,7 @@ final class ReposListPresenter: ReposListPresenterProtocol {
     private let router: ReposListRouterProtocol
     private let interactor: ReposListInteractorProtocol
     private var page: Int = 1
-    private let perPage: Int = 10
+    private let perPage: Int = 30
     private let language = "swift"
     
     init(
